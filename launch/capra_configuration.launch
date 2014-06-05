@@ -1,8 +1,8 @@
 <launch>
   <!-- SENSORS -->
-  <include file="$(find capra_motors)/smartmotor/SmartMotor.launch" />
-  <include file="$(find capra_imu)/imu3dmgx1/3dmgx1.launch" />
-  <include file="$(find capra_lidar/launch/lms100.launch" />
+  <include file="$(find capra_motors)/launch/SmartMotor.launch" />
+  <include file="$(find capra_imu)/launch/3dmgx1.launch" />
+  <include file="$(find capra_lidar/launch/LMS100.launch" />
 
   <!-- TF -->
   <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 .15 0 0 0 0 base_footprint base_link 10" />
@@ -10,6 +10,6 @@
   <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster"     args=".35 0 0 0 0 0 base_link laser 10" />
 
   <!-- SLAM/POSITION -->
-  <include file="$(find capra_2dnav)/kalman.launch" />
-  <include file="$(find capra_2dnav)/gmapping.launch" />
+  <include file="$(find capra_2dnav)/launch/kalman.launch" />
+  <include file="$(find capra_2dnav)/launch/gmapping.launch" />
 </launch>
