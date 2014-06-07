@@ -6,9 +6,7 @@
   <include file="$(find capra_gps)/Gps.launch" />
 
   <!-- TF -->
-  <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 .15 0 0 0 0 base_footprint base_link 10" />
-  <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster"     args="0 0 0 0 0 0 base_link imu 10" />
-  <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster"     args=".35 0 0 0 0 0 base_link laser 10" />
+  <include file="$(find capra_2dnav)/launch/tf.launch" />  
 
   <!-- POSITION -->
   <include file="$(find capra_2dnav)/launch/kalman.launch" />
