@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" args="scan:=scan">
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
     <rosparam>
       base_frame: base_footprint
       map_update_interval: 5.0
