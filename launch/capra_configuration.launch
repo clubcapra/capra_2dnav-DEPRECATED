@@ -3,7 +3,7 @@
   <include file="$(find capra_motors)/launch/SmartMotor.launch" />
   <include file="$(find capra_imu)/launch/3dmgx1.launch" />
   <include file="$(find capra_lidar)/launch/LMS100.launch" />
-  <include file="$(find capra_gps)/Gps.launch" />
+<!--  <include file="$(find capra_gps)/Gps.launch" /> -->
 
   <!-- TF -->
   <include file="$(find capra_2dnav)/launch/tf.launch" />  
