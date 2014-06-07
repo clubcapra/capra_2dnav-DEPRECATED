@@ -12,5 +12,5 @@
 
   <!-- SLAM/POSITION -->
   <include file="$(find capra_2dnav)/launch/kalman.launch" />
-  <include file="$(find capra_2dnav)/launch/gmapping.launch" />
+<!--  <include file="$(find capra_2dnav)/launch/gmapping.launch" /> -->
 </launch>
