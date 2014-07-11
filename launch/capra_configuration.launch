@@ -1,9 +1,14 @@
 <launch>
+  <arg name="outdoor" default="1" />
   <!-- SENSORS -->
-  <include file="$(find capra_motors)/launch/SmartMotor.launch" />
-  <include file="$(find capra_imu)/launch/3dmgx1.launch" />
-  <include file="$(find capra_lidar)/launch/LMS100.launch" />
-  <include file="$(find capra_gps)/launch/Gps.launch" /> 
+  
+  <include file="$(find animatics_smart_motor)/launch/SmartMotor.launch" />
+  <include file="$(find capra_lidar)/launch/LMS100.launch" />  
+
+  <group if="$(arg outdoor)">
+    <include file="$(find microstrain_3dmgx1_imu)/launch/3DMGX1.launch" />
+    <include file="$(find capra_gps)/launch/Gps.launch" /> 
+  </group>
 
   <!-- TF -->
   <include file="$(find capra_2dnav)/launch/tf.launch" />  
