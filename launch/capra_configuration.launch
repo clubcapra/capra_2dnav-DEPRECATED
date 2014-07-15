@@ -18,4 +18,10 @@
     <!-- GPS -->
     <include file="$(find capra_gps)/launch/Gps.launch" /> 
   </group>
+
+  <group unless="$(arg outdoor)">
+    <!-- FAKE IMU -->
+    <include file="$(find capra_lidar)/launch/FakeImu.launch" />
+  </group>
+
 </launch>
