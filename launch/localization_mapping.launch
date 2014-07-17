@@ -8,11 +8,13 @@
 
   <!-- INDOORS (ETS, ...) -->
   <group unless="$(arg outdoor)">
-    <include file="$(find capra_2dnav)/launch/includes/gmapping.launch"/>
+    <include file="$(find capra_2dnav)/launch/includes/hector.launch"/>
   </group>
 
+  <!--
   <include file="$(find capra_2dnav)/launch/includes/kalman.launch">
     <arg name="outdoor" value="$(arg outdoor)" />
   </include>
+  -->
 
 </launch>
