@@ -11,7 +11,7 @@
     <include file="$(find capra_2dnav)/launch/includes/hector.launch"/>
   </group>
 
-  <!--
+  <!--  
   <include file="$(find capra_2dnav)/launch/includes/kalman.launch">
     <arg name="outdoor" value="$(arg outdoor)" />
   </include>
