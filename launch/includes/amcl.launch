@@ -8,6 +8,9 @@
   </node>
 
 
+<!--  <include file="$(find animatics_smart_motor)/launch/OdomToTf.launch" />
+-->
+
   <node pkg="amcl" type="amcl" name="amcl" args="scan:=scan" output="screen">
     <param name="base_frame_id" value="base_footprint" />
   </node>
