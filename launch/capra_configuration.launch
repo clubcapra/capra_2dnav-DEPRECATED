@@ -22,7 +22,7 @@
 
   <group unless="$(arg outdoor)">
     <!-- FAKE IMU -->
-<!--    <include file="$(find capra_lidar)/launch/FakeImu.launch" /> -->
+    <include file="$(find capra_lidar)/launch/FakeImu.launch" />
   </group>
 
 </launch>
