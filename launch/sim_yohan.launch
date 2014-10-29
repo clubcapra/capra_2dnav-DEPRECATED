@@ -17,23 +17,28 @@
 
     <!-- MOVING -->
 
-    <!--<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">-->
-    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="global_costmap" />-->
-    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="local_costmap" />-->
-    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/local_costmap_params.yaml" command="load" />-->
-    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/global_costmap_params.yaml" command="load" />-->
-    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/base_local_planner_params.yaml" command="load" />-->
-    <!--</node>-->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find capra_2dnav)/config/$(arg context)/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find capra_2dnav)/config/$(arg context)/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find capra_2dnav)/config/$(arg context)/base_local_planner_params.yaml" command="load" />
 
-    <node pkg="capra_ai" type="simple_move.py" name="ai" />
+        <remap from="map" to="projected_map" />
+    </node>
+
+    <!--<node pkg="capra_ai" type="simple_move.py" name="ai" />-->
 
     <!-- MAPPING -->
     <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" >
         <remap from="cloud" to="cloud_in" />
     </node>
-    <include file="$(find capra_2dnav)/launch/octomap_capra.launch" />
-    <!--<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" />-->
+    <include file="$(find capra_2dnav)/launch/octomap_capra.launch" >
+    </include>
 
+    <!--<remap from="projected_map" to="map" />-->
+    <!--<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" />-->
+    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 odom map 50" />
 
     <!--RVIZ  -->
 
