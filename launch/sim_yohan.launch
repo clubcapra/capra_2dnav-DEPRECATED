@@ -1,34 +1,41 @@
 <launch>
-  <arg name="context" default="indoors" />
-  <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
-  <!-- GAZEBO -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find capra_gazebo)/worlds/shapes2.world" />
-    <arg name="gui" value="false" />
-  </include>
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find capra_gazebo)/models/capra6/capra6.urdf -urdf -model capra6" />
+    <arg name="context" default="indoors" />
+    <arg name="robot_description" value="$(find capra_gazebo)/models/capra6/capra6.urdf" />
 
-  <!-- BUILD ROBOT -->
-    <rosparam command="load" param="robot_description" file="$(find capra_gazebo)/models/capra6/capra6.urdf" />
+    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
+    <!-- GAZEBO -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find capra_gazebo)/worlds/shapes2.world" />
+        <arg name="gui" value="false" />
+    </include>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(arg robot_description) -urdf -model capra6" />
+
+    <!-- BUILD ROBOT -->
+    <rosparam command="load" param="robot_description" file="$(arg robot_description)" />
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="capra6_state_publisher" />
-    <!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 odom map 50" />
-         <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="0 0 0.2 0 0 0 base_footprint base_link 50" />
-         <node pkg="tf" type="static_transform_publisher" name="link3_broadcaster" args=".5 0 0 0 0 0 base_link laser 50" />-->
-  <!-- MOVING 
-       
-       <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-       <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="global_costmap" />
-       <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="local_costmap" />
-       <rosparam file="$(find capra_2dnav)/config/$(arg context)/local_costmap_params.yaml" command="load" />
-       <rosparam file="$(find capra_2dnav)/config/$(arg context)/global_costmap_params.yaml" command="load" />
-       <rosparam file="$(find capra_2dnav)/config/$(arg context)/base_local_planner_params.yaml" command="load" />
-       </node>
-  -->
-  <!-- MAPPING -->
-  <!--    <include file="$(find capra_2dnav)/launch/octomap_capra.launch" /> -->
-  <!--<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" />
-       <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" >
-       <remap from="cloud" to="cloud_in" />
-       </node>-->
-  <!--<node pkg="rviz" type="rviz" name="rviz" />-->
+
+
+    <!-- MOVING -->
+
+    <!--<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">-->
+    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="global_costmap" />-->
+    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="local_costmap" />-->
+    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/local_costmap_params.yaml" command="load" />-->
+    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/global_costmap_params.yaml" command="load" />-->
+    <!--<rosparam file="$(find capra_2dnav)/config/$(arg context)/base_local_planner_params.yaml" command="load" />-->
+    <!--</node>-->
+
+    <node pkg="capra_ai" type="simple_move.py" name="ai" />
+
+    <!-- MAPPING -->
+    <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" >
+        <remap from="cloud" to="cloud_in" />
+    </node>
+    <include file="$(find capra_2dnav)/launch/octomap_capra.launch" />
+    <!--<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" />-->
+
+
+    <!--RVIZ  -->
+
+    <node pkg="rviz" type="rviz" name="rviz" />
 </launch>
