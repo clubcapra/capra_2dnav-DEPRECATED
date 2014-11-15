@@ -33,7 +33,6 @@
     <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" >
         <remap from="cloud" to="cloud_in" />
     </node>
-
     <include file="$(find capra_2dnav)/launch/octomap_capra.launch" >
     </include>
 
