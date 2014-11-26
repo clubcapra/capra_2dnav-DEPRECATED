@@ -1,15 +1,30 @@
 TrajectoryPlannerROS:
   max_vel_x: 0.5
-  min_vel_x: 0.2
-  max_vel_theta: 0.5
-  min_vel_theta: -0.5
+  min_vel_x: -0.5
+
+  #The rotational velocity allowed for the base in radians/sec
+  max_vel_theta: 10.0
+  min_vel_theta: -10.0
+
+  #The minimum rotational velocity allowed for the base while performing in-place rotations in radians/sec
+  min_in_place_vel_theta: 1.0
+
+  #Speed used for driving during escapes in meters/sec. Must be negative
   escape_vel: -0.3
-  max_rotational_vel: 0.2
-  min_in_place_rotational_vel: 0.05
-  min_in_place_vel_theta: 0.05
+
+  #The x acceleration limit in m/s^2
+  acc_lim_theta: 100.0
+  acc_lim_x: 10.0
+  acc_lim_y: 10.0
+
+  #The weighting for how much the controller should stay close to the path it was given
+  pdist_scale: 1.5
+
+  prune_plan: true
+
+  xy_goal_tolerance: 0.4
+  yaw_goal_tolerance: 0.1
+
   holonomic_robot: false
-  acc_lim_th: 2.0
-  acc_lim_x: 2.5
-  acc_lim_y: 2.5
-  xy_goal_tolerance: 0.3
-  yaw_goal_tolerance: 0.08
+
+  meter_scoring: true
