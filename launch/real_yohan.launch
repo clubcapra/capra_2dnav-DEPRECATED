@@ -18,7 +18,7 @@
    <!-- AI or remote -->
    <include file="$(find capra_teleop)/launch/Teleop.launch" />
 
-        <!-- MOVING
+        <!-- MOVING -->
 
         <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
             <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="global_costmap" />
@@ -28,12 +28,19 @@
             <rosparam file="$(find capra_2dnav)/config/$(arg context)/base_local_planner_params.yaml" command="load" />
 
             <remap from="map" to="projected_map" />
-        </node>-->
+        </node>
 
-    <!-- MAPPING -->
-    <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" >
+    <!-- MAPPING
+
+    <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" output="screen" >
+        <remap from="cloud" to="cloud_in" />
+    </node>-->
+
+    <node pkg="capra_lidar" name="scan_to_cloud_hf_node" type="scan_to_cloud_hf_node" output="screen" >
         <remap from="cloud" to="cloud_in" />
     </node>
+
+
     <include file="$(find capra_2dnav)/launch/octomap_capra.launch" >
     </include>
 
