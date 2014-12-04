@@ -19,6 +19,11 @@ TrajectoryPlannerROS:
 
   #The weighting for how much the controller should stay close to the path it was given
   pdist_scale: 1.5
+  # The weighting for how much the controller should attempt to avoid obstacles
+  occdist_scale: 0.15
+  # The weighting for how much the controller should attempt to reach its local goal, also controls speed
+  gdist_scale: 0.6
+
 
   prune_plan: true
 
