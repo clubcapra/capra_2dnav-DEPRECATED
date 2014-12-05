@@ -22,11 +22,11 @@ TrajectoryPlannerROS:
   #The step size, in radians, to take between angular samples on a given trajectory
   angular_sim_granularity: 0.04
   #The weighting for how much the controller should stay close to the path it was given
-  pdist_scale: 0.1
+  pdist_scale: 1.0
   # The weighting for how much the controller should attempt to avoid obstacles
-  occdist_scale: 0.5
+  occdist_scale: 0.4
   # The weighting for how much the controller should attempt to reach its local goal, also controls speed
-  gdist_scale: 1.0
+  gdist_scale: 0.6
 
 
   prune_plan: true
