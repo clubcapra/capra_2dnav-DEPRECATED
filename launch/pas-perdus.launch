@@ -9,7 +9,9 @@
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="capra6_state_publisher" />
 
   <!-- LIDAR -->
+
   <include file="$(find capra_lidar)/launch/LMS100.launch" />
+  <include file="$(find capra_lidar)/launch/LaserThreshold.launch" />
 
    <!-- MOTORS -->
          <include file="$(find animatics_smart_motor)/launch/SmartMotor.launch" />
