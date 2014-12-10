@@ -47,9 +47,9 @@
 
     <node pkg="amcl" type="amcl" name="amcl_node" >
         <rosparam param="use_map_topic" >true</rosparam>
-        <rosparam param="initial_pose_x" >16.683</rosparam>
-        <rosparam param="initial_pose_y" >-0.798</rosparam>
-        <rosparam param="initial_pose_a" >-2.52</rosparam>
+        <rosparam param="initial_pose_x" >17.0</rosparam>
+        <rosparam param="initial_pose_y" >-0.15</rosparam>
+        <rosparam param="initial_pose_a" >-2.4</rosparam>
 
 
 

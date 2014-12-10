@@ -9,7 +9,9 @@
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="capra6_state_publisher" />
 
   <!-- LIDAR -->
+
   <include file="$(find capra_lidar)/launch/LMS100.launch" />
+  <include file="$(find capra_lidar)/launch/LaserThreshold.launch" />
 
    <!-- MOTORS -->
          <include file="$(find animatics_smart_motor)/launch/SmartMotor.launch" />
@@ -36,23 +38,18 @@
     </node>-->
 
     <node pkg="capra_lidar" name="scan_to_cloud_hf_node" type="scan_to_cloud_hf_node" output="screen" >
-        <!--<remap from="cloud" to="cloud_in" />-->
+        <remap from="cloud" to="cloud_in" />
     </node>
 
-    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" args="$(env IBEX_HOME)/maps/map3.bt" >
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" args="" >
            <remap from="projected_map" to="map" />
-    </node>
-
-    <node pkg="amcl" type="amcl" name="amcl_node" >
-        <rosparam param="use_map_topic" >true</rosparam>
-
     </node>
 
     <!--<remap from="projected_map" to="map" />-->
     <!--<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" />-->
     <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 odom map 50" />
 
-    <!--RVIZ --> 
+    <!--RVIZ -->
 
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find capra_gazebo)/../../rviz_cfg/mapping.rviz"/>
 
