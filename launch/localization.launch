@@ -1,0 +1,39 @@
+<launch>
+
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+
+        <param name="magnetic_declination_radians" value="0"/>
+
+        <param name="roll_offset" value="0"/>
+
+        <param name="pitch_offset" value="0"/>
+
+        <param name="yaw_offset" value="0"/>
+
+        <param name="zero_altitude" value="false"/>
+
+        <remap from="/imu/data" to="/imu_sim" />
+        <remap from="/gps/fix" to="/gps_sim" />
+        <remap from="/odometry/filtered" to="/odom" />
+
+    </node>
+
+
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node_requests" respawn="true">
+        <param name="magnetic_declination_radians" value="0"/>
+        <param name="roll_offset" value="0"/>
+        <param name="pitch_offset" value="0"/>
+        <param name="yaw_offset" value="0"/>
+        <param name="zero_altitude" value="false"/>
+
+        <remap from="/imu/data" to="/imu_sim" />
+        <remap from="/gps/fix" to="/navsat_transform_node_requests/gps_convert_to_xy" />
+        <remap from="/odometry/filtered" to="/odom" />
+        <remap from="/odometry/gps" to="/navsat_transform_node_requests/gps_converted_to_xy" />
+    </node>
+
+    <node pkg="capra_gps" type="coordinate_goal_transformer.py" name="coordinate_goal_transformer" output="screen" >
+        <remap from="/coordinate_goal_transformer/goal_xy" to="/move_base_simple/goal" />
+    </node>
+
+</launch>
