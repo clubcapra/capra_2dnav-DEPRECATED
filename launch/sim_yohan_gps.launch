@@ -51,7 +51,7 @@
         <remap from="/gps/fix" to="/gps_sim" />
         <remap from="/odometry/filtered" to="/odom" />
         <remap from="/latlong_goal_node/goal_xy" to="/move_base_simple/goal" />
-        <include file="$(find capra_2dnav)/launch/gps_localization.launch" />
+        <include file="$(find capra_gps)/launch/gps_localization.launch" />
     </group>
 
 </launch>
