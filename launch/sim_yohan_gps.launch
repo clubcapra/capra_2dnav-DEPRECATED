@@ -3,12 +3,13 @@
     <arg name="robot_description" value="$(find capra_gazebo)/models/capra6/capra6.urdf" />
 
     <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
+
     <!-- GAZEBO -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find capra_gazebo)/worlds/shapes2.world" />
         <arg name="gui" value="false" />
-        <remap from="/imu_sim" to="/imu_data" />
     </include>
+
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(arg robot_description) -urdf -model capra6" />
 
     <!-- BUILD ROBOT -->
@@ -17,7 +18,7 @@
 
 
     <!-- MOVING -->
-
+    <!--
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="global_costmap" />
         <rosparam file="$(find capra_2dnav)/config/$(arg context)/costmap_common_params.yaml" command="load" ns="local_costmap" />
@@ -27,20 +28,25 @@
 
         <remap from="map" to="projected_map" />
     </node>
+    -->
 
-    <!--<node pkg="capra_ai" type="simple_move.py" name="ai" />-->
+    <include file="$(find capra_teleop)/launch/Teleop.launch" />
 
     <!-- MAPPING -->
+    <!--
     <node pkg="scan_to_cloud_converter" name="scan_to_cloud_converter_node" type="scan_to_cloud_converter_node" >
         <remap from="cloud" to="cloud_in" />
     </node>
 
     <include file="$(find capra_2dnav)/launch/octomap_capra.launch" >
     </include>
+    -->
 
     <!--<remap from="projected_map" to="map" />-->
     <!--<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" />-->
+    <!--
     <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 odom map 50" />
+    -->
 
     <!--RVIZ  -->
 
@@ -49,10 +55,12 @@
     <!-- Localization -->
     <group>
         <remap from="/imu/data" to="/imu_data" />
-        <remap from="/gps/fix" to="/gps_sim" />
-        <remap from="/odometry/filtered" to="/odom" />
+        <remap from="/gps/fix" to="/fix" />
+        <remap from="/odometry/filtered" to="/odom" /> 
         <remap from="/latlong_goal_node/goal_xy" to="/move_base_simple/goal" />
         <include file="$(find capra_gps)/launch/gps_localization.launch" />
     </group>
+
+    <include file="$(find capra_2dnav)/launch/includes/kalman.launch" />
 
 </launch>

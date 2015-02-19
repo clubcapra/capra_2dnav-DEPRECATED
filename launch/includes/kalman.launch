@@ -51,6 +51,7 @@
       <param name="imu0_differential" value="false"/>
 
       <param name="imu0_remove_gravitational_acceleration" value="true"/>
+      <param name="broadcast_utm_transform" value="false" />
 
       <!-- If your data is subject to outliers, use these threshold settings, expressed as Mahalanobis distances, to control
            how far away from the current vehicle state a sensor measurement is permitted to be. Each defaults to
