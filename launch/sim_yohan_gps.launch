@@ -7,6 +7,7 @@
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find capra_gazebo)/worlds/shapes2.world" />
         <arg name="gui" value="false" />
+        <remap from="/imu_sim" to="/imu_data" />
     </include>
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(arg robot_description) -urdf -model capra6" />
 
