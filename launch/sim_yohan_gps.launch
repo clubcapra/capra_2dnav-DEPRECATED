@@ -48,7 +48,7 @@
 
     <!-- Localization -->
     <group>
-        <remap from="/imu/data" to="/imu_sim" />
+        <remap from="/imu/data" to="/imu_data" />
         <remap from="/gps/fix" to="/gps_sim" />
         <remap from="/odometry/filtered" to="/odom" />
         <remap from="/latlong_goal_node/goal_xy" to="/move_base_simple/goal" />
